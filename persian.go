@@ -61,3 +61,111 @@ func ToEnglishDigits(text string) string {
 	})
 	return string(out)
 }
+
+//OnlyEnglishNumbers extracts only English digits from string
+func OnlyEnglishNumbers(text string) string {
+	re := regexp.MustCompile("[^0-9.]")
+	return re.ReplaceAllLiteralString(text, "")
+}
+
+//OnlyPersianNumbers extracts only Persian digits from string
+func OnlyPersianNumbers(text string) string {
+	re := regexp.MustCompile("[^۰-۹.]")
+	return re.ReplaceAllLiteralString(text, "")
+}
+
+//SwitchToPersianKey converts English chars to their equivalent Persian char on keyboard
+func SwitchToPersianKey(text string) string {
+	chars := map[string]string{
+		"q":   "ض",
+		"w":   "ص",
+		"e":   "ث",
+		"r":   "ق",
+		"t":   "ف",
+		"y":   "غ",
+		"u":   "ع",
+		"i":   "ه",
+		"o":   "خ",
+		"p":   "ح",
+		"\\[": "ج",
+		"\\]": "چ",
+		"a":   "ش",
+		"s":   "س",
+		"d":   "ی",
+		"f":   "ب",
+		"g":   "ل",
+		"h":   "ا",
+		"j":   "ت",
+		"k":   "ن",
+		"l":   "م",
+		";":   "ک",
+		"'":   "گ",
+		"z":   "ظ",
+		"x":   "ط",
+		"c":   "ز",
+		"v":   "ر",
+		"b":   "ذ",
+		"n":   "د",
+		"m":   "پ",
+		",":   "و",
+		"?":   "؟",
+	}
+
+	out := ""
+	for _, ch := range text {
+		if pch, ok := chars[string(ch)]; ok {
+			out += pch
+		} else {
+			out += string(ch)
+		}
+	}
+	return ToPersianDigits(out)
+}
+
+//SwitchToEnglishKey converts Persian chars to their equivalent English char on keyboard
+func SwitchToEnglishKey(text string) string {
+	chars := map[string]string{
+		"ض": "q",
+		"ص": "w",
+		"ث": "e",
+		"ق": "r",
+		"ف": "t",
+		"غ": "y",
+		"ع": "u",
+		"ه": "i",
+		"خ": "o",
+		"ح": "p",
+		"ج": "\\[",
+		"چ": "\\]",
+		"ش": "a",
+		"س": "s",
+		"ی": "d",
+		"ب": "f",
+		"ل": "g",
+		"ا": "h",
+		"ت": "j",
+		"ن": "k",
+		"م": "l",
+		"ک": ";",
+		"گ": "'",
+		"ظ": "z",
+		"ط": "x",
+		"ز": "c",
+		"ر": "v",
+		"ذ": "b",
+		"د": "n",
+		"پ": "m",
+		"و": ",",
+		"؟": "?",
+	}
+
+	out := ""
+	for _, ch := range text {
+		if pch, ok := chars[string(ch)]; ok {
+			out += pch
+		} else {
+			out += string(ch)
+		}
+	}
+	return ToPersianDigits(out)
+}

@@ -11,23 +11,51 @@ go get github.com/mavihq/persian
 ```
 
 ## API
-### .ToPersianDigits()
+### .ToPersianDigits
 Converts all English digits in the string to Persian digits
 ```
 persian.ToPersianDigits("123salam456")
 => "۱۲۳salam۴۵۶"
 ```
 
-### .ToPersianDigitsFromInt()
+### .ToPersianDigitsFromInt
 Converts integer value to string with Persian digits
 ```
 persian.ToPersianDigitsFromInt(123)
 => "۱۲۳"
 ```
 
-### .ToEnglishDigits()
+### .ToEnglishDigits
 Converts all Persian digits in the string to English digits
 ```
 persian.ToEnglishDigits("۱۲۳salam۴۵۶")
 => "123salam456"
+```
+
+### .OnlyEnglishNumbers
+Extracts only English digits from string
+```
+persian.ToEnglishDigits("123salam۴۵۶")
+=> "123"
+```
+
+### .OnlyPersianNumbers
+Extracts only Persian digits from string
+```
+persian.ToEnglishDigits("123salam۴۵۶")
+=> "۴۵۶"
+```
+
+### .SwitchToPersianKey
+Converts English chars to their equivalent Persian char on keyboard
+```
+persian.ToEnglishDigits("sghl o,fd ? o,fl llk,k")
+=> "سلام خوبی ؟ خوبم ممنون"
+```
+
+### .SwitchToEnglishKey
+Converts Persian chars to their equivalent English char on keyboard
+```
+persian.ToEnglishDigits("اثغ صاشفس عح ؟")
+=> "hey whats up ?"
 ```
