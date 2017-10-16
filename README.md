@@ -1,4 +1,5 @@
 # persian
+![cover.run go](https://cover.run/go/github.com/mavihq/persian.svg)
 Some utilities for persian language in go
 
 ## Installation
