@@ -1,6 +1,7 @@
 package persian
 
 import "regexp"
+import "fmt"
 
 func ToPersianDigits(text string) string {
 	var persian = map[string]string{
@@ -26,6 +27,10 @@ func ToPersianDigits(text string) string {
 		return []byte(out)
 	})
 	return string(out)
+}
+
+func ToPersianDigitsFromInt(value int) string {
+	return ToPersianDigits(fmt.Sprintf("%d", value))
 }
 
 func ToEnglishDigits(text string) string {

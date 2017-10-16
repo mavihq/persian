@@ -14,6 +14,13 @@ persian.ToPersianDigits("123salam456")
 => "۱۲۳salam۴۵۶"
 ```
 
+### .ToPersianDigitsFromInt()
+Converts integer value to string with Persian digits
+```
+persian.ToPersianDigitsFromInt(123)
+=> "۱۲۳"
+```
+
 ### .ToEnglishDigits()
 Converts all Persian digits in the string to English digits
 ```
