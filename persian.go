@@ -3,6 +3,7 @@ package persian
 import "regexp"
 import "fmt"
 
+//ToPersianDigits Converts all English digits in the string to Persian digits
 func ToPersianDigits(text string) string {
 	var persian = map[string]string{
 		"0": "۰",
@@ -29,10 +30,12 @@ func ToPersianDigits(text string) string {
 	return string(out)
 }
 
+//ToPersianDigitsFromInt Converts integer value to string with Persian digits
 func ToPersianDigitsFromInt(value int) string {
 	return ToPersianDigits(fmt.Sprintf("%d", value))
 }
 
+//ToEnglishDigits Converts all Persian digits in the string to English digits
 func ToEnglishDigits(text string) string {
 	var persian = map[string]string{
 		"۰": "0",
