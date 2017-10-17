@@ -40,3 +40,23 @@ func Test_switchToEnglishKey(t *testing.T) {
 	value := "اثغ صاشفس عح ؟"
 	assert.Equal(t, "hey whats up ?", SwitchToEnglishKey(value))
 }
+
+func Test_Currency(t *testing.T) {
+	value := "123۴۵۶7"
+	assert.Equal(t, "۱،۲۳۴،۵۶۷", Currency(value))
+}
+
+func Test_toman(t *testing.T) {
+	value := "123۴۵۶7"
+	assert.Equal(t, "۱،۲۳۴،۵۶۷ تومان", Toman(value))
+}
+
+func Test_rial(t *testing.T) {
+	value := "123۴۵۶7"
+	assert.Equal(t, "۱،۲۳۴،۵۶۷ ﷼", Rial(value))
+}
+
+func Test_fixArabic(t *testing.T) {
+	value := "علي"
+	assert.Equal(t, "علی", FixArabic(value))
+}

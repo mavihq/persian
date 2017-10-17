@@ -3,9 +3,9 @@ package persian
 import "regexp"
 import "fmt"
 
-//ToPersianDigits Converts all English digits in the string to Persian digits
+//ToPersianDigits Converts all English digits in the string to Persian digits.
 func ToPersianDigits(text string) string {
-	var persian = map[string]string{
+	var checker = map[string]string{
 		"0": "۰",
 		"1": "۱",
 		"2": "۲",
@@ -22,7 +22,7 @@ func ToPersianDigits(text string) string {
 		out := ""
 		ss := string(s)
 		for _, ch := range ss {
-			o := persian[string(ch)]
+			o := checker[string(ch)]
 			out = out + o
 		}
 		return []byte(out)
@@ -30,14 +30,14 @@ func ToPersianDigits(text string) string {
 	return string(out)
 }
 
-//ToPersianDigitsFromInt Converts integer value to string with Persian digits
+//ToPersianDigitsFromInt Converts integer value to string with Persian digits.
 func ToPersianDigitsFromInt(value int) string {
 	return ToPersianDigits(fmt.Sprintf("%d", value))
 }
 
-//ToEnglishDigits Converts all Persian digits in the string to English digits
+//ToEnglishDigits Converts all Persian digits in the string to English digits.
 func ToEnglishDigits(text string) string {
-	var persian = map[string]string{
+	var checker = map[string]string{
 		"۰": "0",
 		"۱": "1",
 		"۲": "2",
@@ -54,7 +54,7 @@ func ToEnglishDigits(text string) string {
 		out := ""
 		ss := string(s)
 		for _, ch := range ss {
-			o := persian[string(ch)]
+			o := checker[string(ch)]
 			out = out + o
 		}
 		return []byte(out)
@@ -62,19 +62,25 @@ func ToEnglishDigits(text string) string {
 	return string(out)
 }
 
-//OnlyEnglishNumbers extracts only English digits from string
+//OnlyEnglishNumbers extracts only English digits from string.
 func OnlyEnglishNumbers(text string) string {
 	re := regexp.MustCompile("[^0-9.]")
 	return re.ReplaceAllLiteralString(text, "")
 }
 
-//OnlyPersianNumbers extracts only Persian digits from string
+//OnlyPersianNumbers extracts only Persian digits from string.
 func OnlyPersianNumbers(text string) string {
 	re := regexp.MustCompile("[^۰-۹.]")
 	return re.ReplaceAllLiteralString(text, "")
 }
 
-//SwitchToPersianKey converts English chars to their equivalent Persian char on keyboard
+//OnlyNumbers extracts only digits from string.
+func OnlyNumbers(text string) string {
+	re := regexp.MustCompile("[^۰-۹0-9.]")
+	return re.ReplaceAllLiteralString(text, "")
+}
+
+//SwitchToPersianKey converts English chars to their equivalent Persian char on keyboard.
 func SwitchToPersianKey(text string) string {
 	chars := map[string]string{
 		"q":   "ض",
@@ -122,7 +128,7 @@ func SwitchToPersianKey(text string) string {
 	return ToPersianDigits(out)
 }
 
-//SwitchToEnglishKey converts Persian chars to their equivalent English char on keyboard
+//SwitchToEnglishKey converts Persian chars to their equivalent English char on keyboard.
 func SwitchToEnglishKey(text string) string {
 	chars := map[string]string{
 		"ض": "q",
@@ -167,5 +173,68 @@ func SwitchToEnglishKey(text string) string {
 			out += string(ch)
 		}
 	}
+	return ToEnglishDigits(out)
+}
+
+//FixArabic used for converting Arabic characters to Persian.
+func FixArabic(text string) string {
+	chars := map[string]string{
+		"ي":   "ی",
+		"ك":   "ک",
+		"‍":   "",
+		"دِ":  "د",
+		"بِ":  "ب",
+		"زِ":  "ز",
+		"ذِ":  "ذ",
+		"ِشِ": "ش",
+		"ِسِ": "س",
+		"‌":   "",
+		"ى":   "ی",
+	}
+
+	out := ""
+	for _, ch := range text {
+		if pch, ok := chars[string(ch)]; ok {
+			out += pch
+		} else {
+			out += string(ch)
+		}
+	}
 	return ToPersianDigits(out)
+}
+
+//Reverse reverses the given string.
+func Reverse(s string) string {
+	runes := []rune(s)
+	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
+		runes[i], runes[j] = runes[j], runes[i]
+	}
+	return string(runes)
+}
+
+// Currency formats number to Persian currency style.
+func Currency(amount string) string {
+	countThrees := 0
+	out := ""
+	_amount := []rune(OnlyNumbers(amount))
+	for i := len(_amount) - 1; i >= 0; i-- {
+		if countThrees == 3 {
+			out += ("،" + string(_amount[i]))
+			countThrees = 1
+		} else {
+			out += string(_amount[i])
+			countThrees++
+		}
+	}
+	return ToPersianDigits(Reverse(out))
+}
+
+// Toman formats number to Persian currency style with تومان postfix.
+func Toman(amount string) string {
+	return Currency(amount) + " تومان"
+}
+
+// Rial  formats number to Persian currency style with ﷼ postfix.
+func Rial(amount string) string {
+	return Currency(amount) + " ﷼"
 }
