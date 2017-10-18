@@ -3,7 +3,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/mavihq/persian)](https://goreportcard.com/report/github.com/mavihq/persian)
 [![GoDoc](https://godoc.org/github.com/mavihq/persian?status.svg)](https://godoc.org/github.com/mavihq/persian)
 
-Some utilities for persian language in go.
+Some utilities for Persian language in Go (Golang).
 
 ## Installation
 ```
