@@ -1,8 +1,8 @@
 package persian
 
-import(
-	"regexp"
+import (
 	"fmt"
+	"regexp"
 )
 
 //ToPersianDigits Converts all English digits in the string to Persian digits.
@@ -221,7 +221,7 @@ func Currency(amount string) string {
 	_amount := []rune(OnlyNumbers(amount))
 	for i := len(_amount) - 1; i >= 0; i-- {
 		if countThrees == 3 {
-			out += ("،" + string(_amount[i]))
+			out += "،" + string(_amount[i])
 			countThrees = 1
 		} else {
 			out += string(_amount[i])
@@ -240,7 +240,6 @@ func Toman(amount string) string {
 func Rial(amount string) string {
 	return Currency(amount) + " ﷼"
 }
-
 
 func CheckIsEnglish(text string) bool {
 	for _, r := range text {
