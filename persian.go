@@ -1,7 +1,9 @@
 package persian
 
-import "regexp"
-import "fmt"
+import(
+	"regexp"
+	"fmt"
+)
 
 //ToPersianDigits Converts all English digits in the string to Persian digits.
 func ToPersianDigits(text string) string {
@@ -237,4 +239,14 @@ func Toman(amount string) string {
 // Rial  formats number to Persian currency style with ﷼ postfix.
 func Rial(amount string) string {
 	return Currency(amount) + " ﷼"
+}
+
+
+func CheckIsEnglish(text string) bool {
+	for _, r := range text {
+		if (r < 'a' || r > 'z') && (r < 'A' || r > 'Z') {
+			return false
+		}
+	}
+	return true
 }

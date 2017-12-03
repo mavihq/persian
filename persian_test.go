@@ -60,3 +60,11 @@ func Test_fixArabic(t *testing.T) {
 	value := "علي"
 	assert.Equal(t, "علی", FixArabic(value))
 }
+
+func Test_checkIsEnglish(t *testing.T) {
+	value := "علي"
+	assert.Equal(t, false, CheckIsEnglish(value))
+
+	value = "ali"
+	assert.Equal(t, true, CheckIsEnglish(value))
+}
