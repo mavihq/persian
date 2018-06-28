@@ -35,28 +35,28 @@ persian.ToEnglishDigits("۱۲۳salam۴۵۶")
 ### .OnlyEnglishNumbers
 Extracts only English digits from string.
 ```
-persian.ToEnglishDigits("123salam۴۵۶")
+persian.OnlyEnglishNumbers("123salam۴۵۶")
 => "123"
 ```
 
 ### .OnlyPersianNumbers
 Extracts only Persian digits from string.
 ```
-persian.ToEnglishDigits("123salam۴۵۶")
+persian.OnlyPersianNumbers("123salam۴۵۶")
 => "۴۵۶"
 ```
 
 ### .SwitchToPersianKey
 Converts English chars to their equivalent Persian char on keyboard.
 ```
-persian.ToEnglishDigits("sghl o,fd ? o,fl llk,k")
+persian.SwitchToPersianKey("sghl o,fd ? o,fl llk,k")
 => "سلام خوبی ؟ خوبم ممنون"
 ```
 
 ### .SwitchToEnglishKey
 Converts Persian chars to their equivalent English char on keyboard.
 ```
-persian.ToEnglishDigits("اثغ صاشفس عح ؟")
+persian.SwitchToEnglishKey("اثغ صاشفس عح ؟")
 => "hey whats up ?"
 ```
 
