@@ -68,3 +68,8 @@ func Test_checkIsEnglish(t *testing.T) {
 	value = "ali"
 	assert.Equal(t, true, CheckIsEnglish(value))
 }
+
+func Test_onlyPersianAlpha(t *testing.T) {
+	value := "123456شاهینshaahin"
+	assert.Equal(t, "شاهین", OnlyPersianAlpha(value))
+}

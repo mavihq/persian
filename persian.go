@@ -82,6 +82,12 @@ func OnlyNumbers(text string) string {
 	return re.ReplaceAllLiteralString(text, "")
 }
 
+//OnlyPersianAlpha extracts only persian alphabetes from string.
+func OnlyPersianAlpha(text string) string {
+	re := regexp.MustCompile("[^\u0600-\u06FF.]")
+	return re.ReplaceAllLiteralString(text, "")
+}
+
 //SwitchToPersianKey converts English chars to their equivalent Persian char on keyboard.
 func SwitchToPersianKey(text string) string {
 	chars := map[string]string{
