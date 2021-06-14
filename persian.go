@@ -187,17 +187,17 @@ func SwitchToEnglishKey(text string) string {
 //FixArabic used for converting Arabic characters to Persian.
 func FixArabic(text string) string {
 	chars := map[string]string{
-		"ي":   "ی",
-		"ك":   "ک",
-		"‍":   "",
+		"ي": "ی",
+		"ك": "ک",
+		//		"‍":   "",
 		"دِ":  "د",
 		"بِ":  "ب",
 		"زِ":  "ز",
 		"ذِ":  "ذ",
 		"ِشِ": "ش",
 		"ِسِ": "س",
-		"‌":   "",
-		"ى":   "ی",
+		//		"‌":   "",
+		"ى": "ی",
 	}
 
 	out := ""

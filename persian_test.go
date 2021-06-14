@@ -57,8 +57,8 @@ func Test_rial(t *testing.T) {
 }
 
 func Test_fixArabic(t *testing.T) {
-	value := "علي"
-	assert.Equal(t, "علی", FixArabic(value))
+	value := "علي‌رضا"
+	assert.Equal(t, "علی‌رضا", FixArabic(value))
 }
 
 func Test_checkIsEnglish(t *testing.T) {
