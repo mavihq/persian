@@ -187,17 +187,15 @@ func SwitchToEnglishKey(text string) string {
 //FixArabic used for converting Arabic characters to Persian.
 func FixArabic(text string) string {
 	chars := map[string]string{
-		"ي":   "ی",
-		"ك":   "ک",
-		"‍":   "",
+		"ي": "ی",
+		"ك": "ک",
 		"دِ":  "د",
 		"بِ":  "ب",
 		"زِ":  "ز",
 		"ذِ":  "ذ",
 		"ِشِ": "ش",
 		"ِسِ": "س",
-		"‌":   "",
-		"ى":   "ی",
+		"ى": "ی",
 	}
 
 	out := ""
@@ -210,6 +208,42 @@ func FixArabic(text string) string {
 	}
 	return ToPersianDigits(out)
 }
+
+
+//Normalize used for Normalize Persian for sort and equality check.
+//TODO: Complete list according to Persian Collation
+func Normalize(text string) string {
+	chars := map[string]string{
+		"ي": "ی",
+		"ك": "ک",
+		"دِ":  "د",
+		"بِ":  "ب",
+		"زِ":  "ز",
+		"ذِ":  "ذ",
+		"ِشِ": "ش",
+		"ِسِ": "س",
+		"‍":" ",
+		"‌":" ",
+		"ى": "ی",
+		"ٱ":"ا" ,
+		"آ":"ا" ,
+		"ء":"ا" ,
+		"ئ":"ی" ,
+		"أ":"ا" ,
+		"ة":"ه" ,
+	}
+
+	out := ""
+	for _, ch := range text {
+		if pch, ok := chars[string(ch)]; ok {
+			out += pch
+		} else {
+			out += string(ch)
+		}
+	}
+	return out
+}
+
 
 //Reverse reverses the given string.
 func Reverse(s string) string {
