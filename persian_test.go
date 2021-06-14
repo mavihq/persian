@@ -73,3 +73,9 @@ func Test_onlyPersianAlpha(t *testing.T) {
 	value := "123456شاهینshaahin"
 	assert.Equal(t, "شاهین", OnlyPersianAlpha(value))
 }
+
+func Test_Normalize(t *testing.T) {
+	anormalValue := "متن نا‌نرمال عربي و فارسی با عددهای ۱ و 1"
+	normalValue  := "متن نا نرمال عربی و فارسی با عددهای ۱ و 1"
+	assert.Equal(t,normalValue,Normalize(anormalValue))
+}
