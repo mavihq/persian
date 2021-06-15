@@ -7,29 +7,18 @@ import (
 
 //ToPersianDigits Converts all English digits in the string to Persian digits.
 func ToPersianDigits(text string) string {
-	var checker = map[string]string{
-		"0": "۰",
-		"1": "۱",
-		"2": "۲",
-		"3": "۳",
-		"4": "۴",
-		"5": "۵",
-		"6": "۶",
-		"7": "۷",
-		"8": "۸",
-		"9": "۹",
-	}
-	re := regexp.MustCompile("[0-9]+")
-	out := re.ReplaceAllFunc([]byte(text), func(s []byte) []byte {
-		out := ""
-		ss := string(s)
-		for _, ch := range ss {
-			o := checker[string(ch)]
-			out = out + o
-		}
-		return []byte(out)
-	})
-	return string(out)
+	return strings.NewReplacer(
+		"0", "۰",
+		"1", "۱",
+		"2", "۲",
+		"3", "۳",
+		"4", "۴",
+		"5", "۵",
+		"6", "۶",
+		"7", "۷",
+		"8", "۸",
+		"9", "۹",
+	).Replace(text)
 }
 
 //ToPersianDigitsFromInt Converts integer value to string with Persian digits.
@@ -39,29 +28,18 @@ func ToPersianDigitsFromInt(value int) string {
 
 //ToEnglishDigits Converts all Persian digits in the string to English digits.
 func ToEnglishDigits(text string) string {
-	var checker = map[string]string{
-		"۰": "0",
-		"۱": "1",
-		"۲": "2",
-		"۳": "3",
-		"۴": "4",
-		"۵": "5",
-		"۶": "6",
-		"۷": "7",
-		"۸": "8",
-		"۹": "9",
-	}
-	re := regexp.MustCompile("[۰-۹]+")
-	out := re.ReplaceAllFunc([]byte(text), func(s []byte) []byte {
-		out := ""
-		ss := string(s)
-		for _, ch := range ss {
-			o := checker[string(ch)]
-			out = out + o
-		}
-		return []byte(out)
-	})
-	return string(out)
+	return strings.NewReplacer(
+		"۰", "0",
+		"۱", "1",
+		"۲", "2",
+		"۳", "3",
+		"۴", "4",
+		"۵", "5",
+		"۶", "6",
+		"۷", "7",
+		"۸", "8",
+		"۹", "9",
+	).Replace(text)
 }
 
 //OnlyEnglishNumbers extracts only English digits from string.
@@ -90,158 +68,118 @@ func OnlyPersianAlpha(text string) string {
 
 //SwitchToPersianKey converts English chars to their equivalent Persian char on keyboard.
 func SwitchToPersianKey(text string) string {
-	chars := map[string]string{
-		"q":   "ض",
-		"w":   "ص",
-		"e":   "ث",
-		"r":   "ق",
-		"t":   "ف",
-		"y":   "غ",
-		"u":   "ع",
-		"i":   "ه",
-		"o":   "خ",
-		"p":   "ح",
-		"\\[": "ج",
-		"\\]": "چ",
-		"a":   "ش",
-		"s":   "س",
-		"d":   "ی",
-		"f":   "ب",
-		"g":   "ل",
-		"h":   "ا",
-		"j":   "ت",
-		"k":   "ن",
-		"l":   "م",
-		";":   "ک",
-		"'":   "گ",
-		"z":   "ظ",
-		"x":   "ط",
-		"c":   "ز",
-		"v":   "ر",
-		"b":   "ذ",
-		"n":   "د",
-		"m":   "پ",
-		",":   "و",
-		"?":   "؟",
-	}
-
-	out := ""
-	for _, ch := range text {
-		if pch, ok := chars[string(ch)]; ok {
-			out += pch
-		} else {
-			out += string(ch)
-		}
-	}
-	return ToPersianDigits(out)
+	return strings.NewReplacer(
+		"q", "ض",
+		"w", "ص",
+		"e", "ث",
+		"r", "ق",
+		"t", "ف",
+		"y", "غ",
+		"u", "ع",
+		"i", "ه",
+		"o", "خ",
+		"p", "ح",
+		"\\[", "ج",
+		"\\]", "چ",
+		"a", "ش",
+		"s", "س",
+		"d", "ی",
+		"f", "ب",
+		"g", "ل",
+		"h", "ا",
+		"j", "ت",
+		"k", "ن",
+		"l", "م",
+		";", "ک",
+		"'", "گ",
+		"z", "ظ",
+		"x", "ط",
+		"c", "ز",
+		"v", "ر",
+		"b", "ذ",
+		"n", "د",
+		"m", "پ",
+		",", "و",
+		"?", "؟",
+	).Replace(text)
 }
 
 //SwitchToEnglishKey converts Persian chars to their equivalent English char on keyboard.
 func SwitchToEnglishKey(text string) string {
-	chars := map[string]string{
-		"ض": "q",
-		"ص": "w",
-		"ث": "e",
-		"ق": "r",
-		"ف": "t",
-		"غ": "y",
-		"ع": "u",
-		"ه": "i",
-		"خ": "o",
-		"ح": "p",
-		"ج": "\\[",
-		"چ": "\\]",
-		"ش": "a",
-		"س": "s",
-		"ی": "d",
-		"ب": "f",
-		"ل": "g",
-		"ا": "h",
-		"ت": "j",
-		"ن": "k",
-		"م": "l",
-		"ک": ";",
-		"گ": "'",
-		"ظ": "z",
-		"ط": "x",
-		"ز": "c",
-		"ر": "v",
-		"ذ": "b",
-		"د": "n",
-		"پ": "m",
-		"و": ",",
-		"؟": "?",
-	}
-
-	out := ""
-	for _, ch := range text {
-		if pch, ok := chars[string(ch)]; ok {
-			out += pch
-		} else {
-			out += string(ch)
-		}
-	}
-	return ToEnglishDigits(out)
+	return strings.NewReplacer(
+		"ض", "q",
+		"ص", "w",
+		"ث", "e",
+		"ق", "r",
+		"ف", "t",
+		"غ", "y",
+		"ع", "u",
+		"ه", "i",
+		"خ", "o",
+		"ح", "p",
+		"ج", "\\[",
+		"چ", "\\]",
+		"ش", "a",
+		"س", "s",
+		"ی", "d",
+		"ب", "f",
+		"ل", "g",
+		"ا", "h",
+		"ت", "j",
+		"ن", "k",
+		"م", "l",
+		"ک", ";",
+		"گ", "'",
+		"ظ", "z",
+		"ط", "x",
+		"ز", "c",
+		"ر", "v",
+		"ذ", "b",
+		"د", "n",
+		"پ", "m",
+		"و", ",",
+		"؟", "?",
+	).Replace(text)
 }
 
 //FixArabic used for converting Arabic characters to Persian.
 func FixArabic(text string) string {
-	chars := map[string]string{
-		"ي": "ی",
-		"ك": "ک",
-		"دِ":  "د",
-		"بِ":  "ب",
-		"زِ":  "ز",
-		"ذِ":  "ذ",
-		"ِشِ": "ش",
-		"ِسِ": "س",
-		"ى": "ی",
-	}
-
-	out := ""
-	for _, ch := range text {
-		if pch, ok := chars[string(ch)]; ok {
-			out += pch
-		} else {
-			out += string(ch)
-		}
-	}
-	return ToPersianDigits(out)
+	return strings.NewReplacer(
+		"ي", "ی",
+		"ك", "ک",
+		"دِ", "د",
+		"بِ", "ب",
+		"زِ", "ز",
+		"ذِ", "ذ",
+		"ِشِ", "ش",
+		"ِسِ", "س",
+		"ى", "ی",
+	).Replace(text)
 }
 
 
 //Normalize used for Normalize Persian for sort and equality check.
 //TODO: Complete list according to Persian Collation
 func Normalize(text string) string {
-	chars := map[string]string{
-		"ي": "ی",
-		"ك": "ک",
-		"دِ":  "د",
-		"بِ":  "ب",
-		"زِ":  "ز",
-		"ذِ":  "ذ",
-		"ِشِ": "ش",
-		"ِسِ": "س",
-		"‍":" ",
-		"‌":" ",
-		"ى": "ی",
-		"ٱ":"ا" ,
-		"آ":"ا" ,
-		"ء":"ا" ,
-		"ئ":"ی" ,
-		"أ":"ا" ,
-		"ة":"ه" ,
-	}
-
-	out := ""
-	for _, ch := range text {
-		if pch, ok := chars[string(ch)]; ok {
-			out += pch
-		} else {
-			out += string(ch)
-		}
-	}
-	return out
+	return strings.NewReplacer(
+		"ي", "ی",
+		"ك", "ک",
+		"دِ", "د",
+		"بِ", "ب",
+		"زِ", "ز",
+		"ذِ", "ذ",
+		"ِشِ", "ش",
+		"ِسِ", "س",
+		"‍", " ",
+		"‌", " ",
+		"ى", "ی",
+		"ٱ","ا" ,
+		"آ","ا" ,
+		"ء","ا" ,
+		"ئ","ی" ,
+		"أ","ا" ,
+		"ة","ه" ,
+	).Replace(text)
 }
 
 
