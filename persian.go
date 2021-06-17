@@ -3,6 +3,7 @@ package persian
 import (
 	"fmt"
 	"regexp"
+	"strings"
 )
 
 //ToPersianDigits Converts all English digits in the string to Persian digits.
