@@ -56,6 +56,11 @@ func Test_rial(t *testing.T) {
 	assert.Equal(t, "۱،۲۳۴،۵۶۷ ﷼", Rial(value))
 }
 
+func Test_ArabicToEnglishDigits(t *testing.T) {
+	value := "٠١٢٣٤٥٦٧٨٩"
+	assert.Equal(t, "0123456789", ArabicToEnglishDigits(value))
+}
+
 func Test_fixArabic(t *testing.T) {
 	value := "علي‌رضا"
 	assert.Equal(t, "علی‌رضا", FixArabic(value))
