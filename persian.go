@@ -54,6 +54,34 @@ func ToEnglishDigits(text string) string {
 	).Replace(text)
 }
 
+//ArabicToEnglishDigits converts all indo-arabic numerals (٠١٢٣٤٥٦٧٨٩) to Arabic numerals (0123456789)
+func ArabicToEnglishDigits(text string) string {
+	var checker = map[string]string{
+		"٠": "0",
+		"١": "1",
+		"٢": "2",
+		"٣": "3",
+		"٤": "4",
+		"٥": "5",
+		"٦": "6",
+		"٧": "7",
+		"٨": "8",
+		"٩": "9",
+	}
+	re := regexp.MustCompile("[٠-٩]+")
+	out := re.ReplaceAllFunc([]byte(text), func(s []byte) []byte {
+		out := ""
+		ss := string(s)
+		for _, ch := range ss {
+			o := checker[string(ch)]
+			out = out + o
+		}
+		return []byte(out)
+	})
+	return string(out)
+
+}
+
 //OnlyEnglishNumbers extracts only English digits from string.
 func OnlyEnglishNumbers(text string) string {
 	re := regexp.MustCompile("[^0-9.]")
